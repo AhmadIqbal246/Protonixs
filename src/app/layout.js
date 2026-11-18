@@ -1,7 +1,7 @@
 import { inter, playfair, jetbrains, spaceGrotesk } from '@/lib/fonts';
 import './globals.css';
 import ClientLayout from '@/components/layout/ClientLayout';
-import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
+import GoogleAnalytics, { GoogleTagManagerNoscript } from '@/components/analytics/GoogleAnalytics';
 import JsonLd from '@/components/seo/JsonLd';
 import { pageMetadata } from '@/lib/seo/metadata';
 import { globalSchemas } from '@/lib/seo/schemas';
@@ -25,6 +25,7 @@ export default function RootLayout({ children }) {
     return (
         <html lang="en" className={`${inter.variable} ${playfair.variable} ${jetbrains.variable} ${spaceGrotesk.variable}`}>
             <body className="bg-canvas text-foreground selection:bg-accent selection:text-foreground overflow-x-hidden">
+                <GoogleTagManagerNoscript />
                 <JsonLd data={globalSchemas()} />
                 <GoogleAnalytics />
                 <ClientLayout>
