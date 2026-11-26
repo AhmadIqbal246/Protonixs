@@ -1,27 +1,49 @@
 import { siteConfig } from "@/lib/seo/site-config";
-import { projects } from "@/data/content";
-import { getAllPostSlugs } from "@/data/blog";
+import { authors, categories, getAllPostSlugs, getAllTags, getPostsByCategory } from "@/data/blog";
 
 export default function sitemap() {
-    const staticRoutes = ["", "/about", "/services", "/team", "/contact", "/faq", "/projects", "/blog"];
+    const staticRoutes = [
+        "",
+        "/blog",
+        "/about",
+        "/contact",
+        "/privacy",
+        "/terms",
+        "/disclaimer",
+        "/cookies",
+        "/affiliate-disclosure",
+        "/authors",
+    ];
     const now = new Date();
     const staticEntries = staticRoutes.map((route) => ({
         url: `${siteConfig.url}${route}`,
         lastModified: now,
         changeFrequency: route === "" ? "weekly" : "monthly",
-        priority: route === "" ? 1 : 0.8,
+        priority: route === "" ? 1 : 0.7,
     }));
-    const projectEntries = projects.map((p) => ({
-        url: `${siteConfig.url}/projects/${p.slug}`,
+    const categoryEntries = categories.filter(({ slug }) => getPostsByCategory(slug).length > 0).map(({ slug }) => ({
+        url: `${siteConfig.url}/category/${slug}`,
+        lastModified: now,
+        changeFrequency: "weekly",
+        priority: 0.6,
+    }));
+    const authorEntries = authors.map(({ slug }) => ({
+        url: `${siteConfig.url}/authors/${slug}`,
         lastModified: now,
         changeFrequency: "monthly",
-        priority: 0.7,
+        priority: 0.5,
     }));
-    const blogEntries = getAllPostSlugs().map((slug) => ({
+    const tagEntries = getAllTags().map(({ slug }) => ({
+        url: `${siteConfig.url}/tag/${slug}`,
+        lastModified: now,
+        changeFrequency: "monthly",
+        priority: 0.4,
+    }));
+    const articleEntries = getAllPostSlugs().map((slug) => ({
         url: `${siteConfig.url}/blog/${slug}`,
         lastModified: now,
         changeFrequency: "monthly",
-        priority: 0.6,
+        priority: 0.8,
     }));
-    return [...staticEntries, ...projectEntries, ...blogEntries];
+    return [...staticEntries, ...categoryEntries, ...authorEntries, ...tagEntries, ...articleEntries];
 }

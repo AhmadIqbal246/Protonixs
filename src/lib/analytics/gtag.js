@@ -1,4 +1,4 @@
-export const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || "GTM-W4VJHMJ9";
+export const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || "";
 
 export function pageview(url) {
     if (!GTM_ID || typeof window === "undefined") return;
