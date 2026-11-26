@@ -8,7 +8,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }) {
     const post = getPostBySlug(params.slug);
     if (!post) {
-        return { title: "Article Not Found | Protonixs", robots: { index: false, follow: false } };
+        return { title: "Article Not Found | Protonixs Journal", robots: { index: false, follow: false } };
     }
     return buildBlogPostMetadata(post);
 }

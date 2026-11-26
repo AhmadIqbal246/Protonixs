@@ -4,6 +4,7 @@ export const siteConfig = {
     url: "https://www.protonixs.com",
     owner: "Ahmad Iqbal",
     email: "ahmad@protonixs.com",
+    logo: "/p-logo.png",
     phone: "+923150401307",
     address: {
         streetAddress: "DHA Phase 8",
@@ -22,16 +23,13 @@ export const siteConfig = {
         "https://www.facebook.com/share/1AVCKR2WJd/",
         "https://www.instagram.com/protonixs",
     ],
-    defaultOgImage: "/og-default.png",
+    defaultOgImage: "/p-logo.png",
     locale: "en_US",
     keywords: [
-        "Protonixs AI chatbot development",
-        "Protonixs web development agency",
-        "Protonixs Lahore software company",
-        "custom RAG chatbot development",
-        "AI automation agency Pakistan",
-        "Django Next.js SaaS development",
-        "custom software development Lahore",
+        "AI tools",
+        "web development",
+        "technology guides",
+        "Protonixs Journal",
     ],
 };
 

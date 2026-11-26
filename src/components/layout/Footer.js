@@ -1,154 +1,38 @@
-"use client";
-
-import React from "react";
 import Link from "next/link";
-import Image from "next/image";
-import { Github, Linkedin, Facebook, Instagram, Mail, ArrowRight, MapPin, Phone } from "lucide-react";
-import MagneticButton from "@/components/animations/MagneticButton";
+import { siteConfig } from "@/lib/seo/site-config";
 
-const LOGO_SRC = "/navbar-logo.png";
+const footerLinks = [
+    ["All articles", "/blog"],
+    ["RSS feed", "/feed.xml"],
+    ["About", "/about"],
+    ["Contact", "/contact"],
+    ["Privacy policy", "/privacy"],
+    ["Terms", "/terms"],
+    ["Disclaimer", "/disclaimer"],
+    ["Cookie policy", "/cookies"],
+    ["Affiliate disclosure", "/affiliate-disclosure"],
+    ["Authors", "/authors"],
+];
 
 export default function Footer() {
     return (
-        <footer className="relative pt-32 pb-10 bg-transparent border-t border-white/5 overflow-hidden">
-            {/* Background Decorative Element */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-foreground/50 to-transparent" />
-
-            <div className="container mx-auto px-6 lg:px-12 relative z-10">
-                {/* Big CTA Section */}
-                <div className="flex flex-col lg:flex-row items-center justify-between gap-10 mb-24 p-12 rounded-3xl bg-surface/30 backdrop-blur-xl border border-white/5 shadow-2xl">
-                    <div className="text-center lg:text-left">
-                        <h2 className="text-3xl md:text-5xl font-serif font-bold text-white mb-4 leading-tight">
-                            Ready to <span className="gradient-text-animated">transform</span> your business?
-                        </h2>
-                        <p className="text-muted text-lg max-w-xl">
-                            Let&apos;s build the next generation of AI-powered solutions together.
-                            Our team is ready to turn your vision into reality.
-                        </p>
-                    </div>
-                    <MagneticButton>
-                        <Link href="/contact">
-                            <div className="group flex items-center gap-3 py-5 px-10 bg-gradient-btn text-btn-primary-foreground font-bold rounded-2xl shadow-glow transition-all duration-300">
-                                <span>Get a Free Quote</span>
-                                <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
-                            </div>
-                        </Link>
-                    </MagneticButton>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
-                    {/* Brand Column */}
-                    <div className="flex flex-col gap-4 -mt-2">
-                        <Link href="/" className="cursor-pointer block -mt-6 md:-mt-10">
-                            <div className="group">
-                                <Image
-                                    src={LOGO_SRC}
-                                    alt="Protonixs"
-                                    width={520}
-                                    height={144}
-                                    className="h-28 md:h-36 lg:h-40 w-auto object-contain mix-blend-screen transition-transform duration-300 group-hover:scale-105"
-                                />
-                            </div>
-                        </Link>
-                        <p className="text-muted text-sm leading-relaxed -mt-6 md:-mt-8">
-                            Engineering digital ecosystems that transform businesses through AI, Web Development, and Custom Software Excellence.
-                        </p>
-                        <div className="flex gap-4">
-                            <a
-                                href="https://github.com/AhmadIqbal246"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="w-12 h-12 flex items-center justify-center rounded-full bg-surface border border-white/5 text-muted hover:text-accent hover:border-accent/30 transition-all shadow-lg"
-                                aria-label="GitHub"
-                            >
-                                <Github size={18} />
-                            </a>
-                            <a
-                                href="https://www.linkedin.com/company/protonixs"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="w-12 h-12 flex items-center justify-center rounded-full bg-surface border border-white/5 text-muted hover:text-accent hover:border-accent/30 transition-all shadow-lg"
-                                aria-label="LinkedIn"
-                            >
-                                <Linkedin size={18} />
-                            </a>
-                            <a
-                                href="https://www.facebook.com/share/1AVCKR2WJd/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="w-12 h-12 flex items-center justify-center rounded-full bg-surface border border-white/5 text-muted hover:text-accent hover:border-accent/30 transition-all shadow-lg"
-                                aria-label="Facebook"
-                            >
-                                <Facebook size={18} />
-                            </a>
-                            <a
-                                href="https://www.instagram.com/protonixs?igsh=emVjbGdnOGN0aXM0"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="w-12 h-12 flex items-center justify-center rounded-full bg-surface border border-white/5 text-muted hover:text-accent hover:border-accent/30 transition-all shadow-lg"
-                                aria-label="Instagram"
-                            >
-                                <Instagram size={18} />
-                            </a>
-                        </div>
-                    </div>
-
-                    {/* Services Column */}
-                    <div className="flex flex-col gap-6">
-                        <h4 className="text-white font-bold uppercase tracking-widest text-xs">Services</h4>
-                        <div className="flex flex-col gap-4 text-muted text-sm">
-                            <Link href="/services" className="hover:text-accent transition-colors">AI & RAG Systems</Link>
-                            <Link href="/services" className="hover:text-accent transition-colors">Web Development</Link>
-                            <Link href="/services" className="hover:text-accent transition-colors">SaaS Solutions</Link>
-                            <Link href="/services" className="hover:text-accent transition-colors">Cloud Architecture</Link>
-                        </div>
-                    </div>
-
-                    {/* Quick Links Column */}
-                    <div className="flex flex-col gap-6">
-                        <h4 className="text-white font-bold uppercase tracking-widest text-xs">Company</h4>
-                        <div className="flex flex-col gap-4 text-muted text-sm">
-                            <Link href="/about" className="hover:text-accent transition-colors">About Us</Link>
-                            <Link href="/team" className="hover:text-accent transition-colors">Our Team</Link>
-                            <Link href="/projects" className="hover:text-accent transition-colors">Our Work</Link>
-                            <Link href="/faq" className="hover:text-accent transition-colors">FAQs</Link>
-                            <Link href="/blog" className="hover:text-accent transition-colors">Blog</Link>
-                            <Link href="/contact" className="hover:text-accent transition-colors">Contact</Link>
-                        </div>
-                    </div>
-
-                    {/* Contact Info Column */}
-                    <div className="flex flex-col gap-6">
-                        <h4 className="text-white font-bold uppercase tracking-widest text-xs">Get in Touch</h4>
-                        <div className="flex flex-col gap-4 text-muted text-sm">
-                            <a href="mailto:ahmad@protonixs.com" className="flex items-center gap-3 hover:text-accent transition-colors">
-                                <Mail size={16} className="text-accent" />
-                                ahmad@protonixs.com
-                            </a>
-                            <div className="flex items-center gap-3">
-                                <Phone size={16} className="text-accent" />
-                                +923150401307
-                            </div>
-                            <div className="flex items-center gap-3">
-                                <MapPin size={16} className="text-accent" />
-                                DHA Phase 8, Lahore
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Bottom Section */}
-                <div className="flex justify-center items-center pt-10 border-t border-white/5">
-                    <p className="text-muted font-mono text-[10px] uppercase tracking-widest text-center">
-                        © {new Date().getFullYear()} Protonixs. ALL RIGHTS RESERVED.
+        <footer className="site-footer">
+            <div className="footer-inner">
+                <div>
+                    <Link className="site-brand" href="/">Protonixs Journal</Link>
+                    <p className="footer-about">
+                        Independent notes on AI tools, web development, and technology from Protonixs.
+                        Questions or corrections? Contact us at{" "}
+                        <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>.
                     </p>
                 </div>
+                <nav className="footer-links" aria-label="Trust and site information">
+                    {footerLinks.map(([label, href]) => (
+                        <Link href={href} key={href}>{label}</Link>
+                    ))}
+                </nav>
+                <p className="footer-copyright">© {new Date().getFullYear()} Protonixs.</p>
             </div>
-
-            {/* Huge Background Text */}
-            <h2 className="absolute -bottom-10 left-1/2 -translate-x-1/2 text-[20vw] font-serif font-black text-white/[0.02] pointer-events-none select-none">
-                Protonixs
-            </h2>
         </footer>
     );
 }

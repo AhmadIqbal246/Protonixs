@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Protonixs Journal
 
-## Getting Started
+A server-rendered Next.js blog about AI tools, web development, and technology. The site
+includes category, tag, author, and article routes; server-side search and pagination; a
+light-first theme toggle; contact and policy pages; structured metadata; an XML sitemap;
+and an RSS feed.
 
-First, run the development server:
+## Run locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Use `npm run lint` to check the code and `npm run build` to create a production build.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Publishing articles
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Article data lives in `src/data/blog/index.js`. The article list is intentionally empty.
+Add only original articles that have been reviewed and tested by their named author. Do not
+publish generated filler, unverified results, copied material, private client information,
+or screenshots that you do not own or have permission to use.
 
-## Learn More
+Each published article should include a unique slug, title, useful description, publication
+and update dates, author slug, category slug, tags, and Markdown content. Include real
+first-hand observations and evidence, explain failures and limitations, cite external facts,
+and verify every code sample and link before publishing.
 
-To learn more about Next.js, take a look at the following resources:
+Authors and categories are maintained in the same data module. Categories without published
+articles are not added to the sitemap. Search and pagination use query parameters on `/blog`;
+category, tag, author, and article pages are rendered on the server.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Environment configuration
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Copy `.env.example` to `.env.local` and set only the values you use:
 
-## Deploy on Vercel
+- `NEXT_PUBLIC_GTM_ID` enables Google Tag Manager.
+- `NEXT_PUBLIC_ADSENSE_CLIENT_ID` accepts a `ca-pub-...` publisher ID.
+- `NEXT_PUBLIC_CONSENT_PLATFORM_CONFIGURED` must be `true` before analytics or AdSense
+  scripts load. Keep it `false` until a suitable Google-certified consent management
+  platform is integrated and verified for the regions you serve.
+- Google and Bing verification values are used by the root Metadata API.
+- SMTP settings power the contact form. Configure `CONTACT_TO` and the SMTP credentials
+  before relying on form delivery.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Do not add a placeholder `ads.txt` entry. After AdSense issues a publisher ID, publish the
+exact seller line from the account at `/ads.txt`. AdSense approval also depends on the
+publisher's account eligibility, original articles, site ownership, and current Google
+policies; the software cannot guarantee approval.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Routes
+
+- `/` and `/blog`: article archive and search
+- `/category/[slug]`, `/tag/[slug]`: taxonomy archives
+- `/blog/[slug]`: server-rendered article pages
+- `/authors` and `/authors/[slug]`: author directory and profiles
+- `/about`, `/contact`, `/privacy`, `/terms`, `/disclaimer`, `/cookies`,
+  `/affiliate-disclosure`: publisher and trust information
+- `/sitemap.xml`, `/robots.txt`, `/feed.xml`: discovery and syndication

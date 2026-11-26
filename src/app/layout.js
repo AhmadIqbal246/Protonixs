@@ -1,11 +1,17 @@
-import { inter, playfair, jetbrains, spaceGrotesk } from '@/lib/fonts';
+import { inter } from '@/lib/fonts';
 import './globals.css';
-import ClientLayout from '@/components/layout/ClientLayout';
+import Script from 'next/script';
 import GoogleAnalytics, { GoogleTagManagerNoscript } from '@/components/analytics/GoogleAnalytics';
 import JsonLd from '@/components/seo/JsonLd';
 import { pageMetadata } from '@/lib/seo/metadata';
 import { globalSchemas } from '@/lib/seo/schemas';
 import { siteConfig } from '@/lib/seo/site-config';
+
+const adsenseClientId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID;
+const consentPlatformConfigured = process.env.NEXT_PUBLIC_CONSENT_PLATFORM_CONFIGURED === "true";
+if (adsenseClientId && !/^ca-pub-\d+$/.test(adsenseClientId)) {
+    throw new Error('NEXT_PUBLIC_ADSENSE_CLIENT_ID must be a valid ca-pub- publisher ID.');
+}
 
 const verification = {};
 if (process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION) {
@@ -23,14 +29,20 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
     return (
-        <html lang="en" className={`${inter.variable} ${playfair.variable} ${jetbrains.variable} ${spaceGrotesk.variable}`}>
-            <body className="bg-canvas text-foreground selection:bg-accent selection:text-foreground overflow-x-hidden">
-                <GoogleTagManagerNoscript />
+        <html lang="en" className={inter.variable} data-theme="light">
+            <body>
+                {consentPlatformConfigured ? <GoogleTagManagerNoscript /> : null}
                 <JsonLd data={globalSchemas()} />
-                <GoogleAnalytics />
-                <ClientLayout>
-                    {children}
-                </ClientLayout>
+                {consentPlatformConfigured ? <GoogleAnalytics /> : null}
+                {consentPlatformConfigured && adsenseClientId ? (
+                    <Script
+                        async
+                        crossOrigin="anonymous"
+                        strategy="afterInteractive"
+                        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClientId}`}
+                    />
+                ) : null}
+                {children}
             </body>
         </html>
     );
